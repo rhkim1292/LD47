@@ -7,6 +7,8 @@ public class PlayerController2D : MonoBehaviour
     Animator animator;
     Rigidbody2D rb2d;
     SpriteRenderer spriteRenderer;
+    Collider2D playerCollider;
+    Collider2D platformCollider;
 
     bool isGrounded;
 
@@ -18,6 +20,9 @@ public class PlayerController2D : MonoBehaviour
 
     [SerializeField]
     Transform groundCheckR;
+
+    [SerializeField]
+    GameObject platforms;
 
     [SerializeField]
     private float runSpeed = 1;
@@ -34,15 +39,24 @@ public class PlayerController2D : MonoBehaviour
         animator = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerCollider = GetComponent<Collider2D>();
+        platformCollider = platforms.GetComponent<Collider2D>();
+        PlatformEffector2D platformEffector = platformCollider.GetComponent<PlatformEffector2D>();
+
+        //Disable PlatformEffector2D
+        platformEffector.useColliderMask = false;
     }
 
     private void FixedUpdate()
     {
-        Debug.Log("Grounded: " + isGrounded);
+        //Debug.Log("Grounded: " + isGrounded);
 
         if((Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"))) ||
           (Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Ground"))) ||
-          (Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Ground"))))
+          (Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Ground"))) ||
+          (Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Platform"))) ||
+          (Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Platform"))) ||
+          (Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Platform"))))
         {
             isGrounded = true;
         }
@@ -80,10 +94,23 @@ public class PlayerController2D : MonoBehaviour
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
         }
-        if(Input.GetKey("space") && isGrounded)
+        if(Input.GetKey("space") && isGrounded && !(Input.GetKey("s") || Input.GetKey("down")) && rb2d.velocity.y <= 0)
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x, jumpHeight);
             //animator.Play("Player_jump");
         }
+
+        if((Input.GetKey("s") || Input.GetKey("down")) && Input.GetKey("space") && isGrounded)
+        {
+            StartCoroutine(getDropInput());
+        }
+    }
+
+    IEnumerator getDropInput()
+    {
+        Physics2D.IgnoreLayerCollision(9, 10, true);
+        yield return new WaitForSeconds(0.2f);
+        Physics2D.IgnoreLayerCollision(9, 10, false);
+        //rb2d.AddForce(new Vector2(0.0f, -20.0f));
     }
 }

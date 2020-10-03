@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 52938373}
   - component: {fileID: 52938372}
   - component: {fileID: 52938374}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,9 +197,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1046622341
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 4334783836991956000, guid: db62648691224a54882a0fcce03e5564,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -220,7 +220,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52938368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.928, y: -0.17, z: 0}
+  m_LocalPosition: {x: -0.473, y: 0.455, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 499330546}
@@ -291,6 +291,7 @@ MonoBehaviour:
   groundCheck: {fileID: 499330546}
   groundCheckL: {fileID: 1022439132}
   groundCheckR: {fileID: 1889612811}
+  platforms: {fileID: 2063717392}
   runSpeed: 1.5
   jumpHeight: 4
   autoRun: 0
@@ -303,7 +304,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 499330546}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -416,7 +417,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1022439132}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheckL
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -431,7 +432,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022439131}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.211, y: -0.0020000003, z: 0}
+  m_LocalPosition: {x: -0.218, y: -0.0020000003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 52938371}
@@ -512,7 +513,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522310488}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.275, y: 0.632, z: 0}
+  m_LocalPosition: {x: -1.275, y: 0.632, z: 2}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -572,9 +573,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 264952071
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 5658dbe068cfce54f96ff8a5ee6028f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -635,7 +636,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1889612811}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheckR
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -650,7 +651,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889612810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.209, y: -0.0020000003, z: 0}
+  m_LocalPosition: {x: 0.212, y: -0.0020000003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 52938371}
@@ -668,7 +669,7 @@ GameObject:
   - component: {fileID: 2063717394}
   - component: {fileID: 2063717393}
   - component: {fileID: 2063717396}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -737,9 +738,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 87321743
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: d30f95207303dcf4daf64d49a78d5e54, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

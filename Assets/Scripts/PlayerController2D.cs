@@ -49,7 +49,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Debug.Log("Grounded: " + isGrounded);
+        Debug.Log("Grounded: " + isGrounded);
 
         if((Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"))) ||
           (Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Ground"))) ||
@@ -94,7 +94,7 @@ public class PlayerController2D : MonoBehaviour
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
         }
-        if(Input.GetKey("space") && isGrounded && !(Input.GetKey("s") || Input.GetKey("down")) && rb2d.velocity.y <= 0)
+        if(Input.GetKey("space") && isGrounded && !(Input.GetKey("s") || Input.GetKey("down")))
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x, jumpHeight);
             //animator.Play("Player_jump");
@@ -112,5 +112,10 @@ public class PlayerController2D : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         Physics2D.IgnoreLayerCollision(9, 10, false);
         //rb2d.AddForce(new Vector2(0.0f, -20.0f));
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+
     }
 }

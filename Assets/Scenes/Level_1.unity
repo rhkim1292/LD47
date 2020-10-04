@@ -2106,11 +2106,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2814738db59c6f74f817645b5123838d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vvErr: 0.25
   groundCheck: {fileID: 842005408}
   groundCheckL: {fileID: 240473664}
   groundCheckR: {fileID: 1177908286}
   platforms: {fileID: 1536268663}
-  runSpeed: 40
+  runSpeed: 25.01
   jumpHeight: 30
   autoRun: 1
 --- !u!50 &1943489106

@@ -97,7 +97,7 @@ public class PlayerController2D : MonoBehaviour
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
         }
-        if(Input.GetKey("space") && isGrounded && !(Input.GetKey("s") || Input.GetKey("down")) && rb2d.velocity.y >= -vvErr)
+        if(Input.GetKey("space") && isGrounded && !(Input.GetKey("s") || Input.GetKey("down")) && rb2d.velocity.y <= vvErr)
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x, jumpHeight);
             //animator.Play("Player_jump");
@@ -115,11 +115,5 @@ public class PlayerController2D : MonoBehaviour
         animator.Play("Player_jump");
         yield return new WaitForSeconds(0.4f);
         Physics2D.IgnoreLayerCollision(9, 10, false);
-        //rb2d.AddForce(new Vector2(0.0f, -20.0f));
-    }
-
-    void OnCollisionEnter(Collision col)
-    {
-
     }
 }

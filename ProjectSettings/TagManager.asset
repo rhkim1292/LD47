@@ -16,7 +16,7 @@ TagManager:
   - Ground
   - Player
   - Platform
-  - 
+  - Restart
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1046622341
+    locked: 0
+  - name: Restart
+    uniqueID: 1016205455
     locked: 0

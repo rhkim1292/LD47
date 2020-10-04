@@ -5,26 +5,36 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public float Score;
+    float initialPos;
     public Transform player;
     public Text ScoreText;
+    public int Score;
+    private bool restarted;
 
-    // Start is called before the first frame update
     void Start()
     {
-        transform.position = player.position;
-        Score = 0;
+        restarted = false;
+        initialPos = player.position.x;
     }
 
     // Update is called once per frame
     void Update()
     {
-        AddScore();
+        Score = (int)Vector2.Distance(new Vector2(player.position.x, 0), new Vector2(initialPos, 0));
+        ScoreText.text = Score.ToString();
     }
 
-    void AddScore()
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        Debug.Log(col.gameObject.layer);
+        if (col.gameObject.layer == 11)
+        {
+            restarted = true;
+        }
+    }
+    /*void AddScore()
     {
         Score = Vector2.Distance(player.position, transform.position);
         ScoreText.text = Score.ToString("0");
-    }
+    }*/
 }

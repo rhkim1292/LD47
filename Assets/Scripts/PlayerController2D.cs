@@ -52,58 +52,59 @@ public class PlayerController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log("Grounded: " + isGrounded);
+        //Debug.Log("Grounded: " + isGrounded);
 
-        if((Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"))) ||
-          (Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Ground"))) ||
-          (Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Ground"))) ||
-          (Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Platform"))) ||
-          (Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Platform"))) ||
-          (Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Platform"))))
+        if ((Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"))) ||
+           (Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Ground"))) ||
+           (Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Ground"))) ||
+           (Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Platform"))) ||
+           (Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Platform"))) ||
+           (Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Platform"))))
         {
             isGrounded = true;
         }
         else
         {
             isGrounded = false;
-            animator.Play("Player_jump");
+            //animator.Play("Player_jump");
         }
 
-        if(autoRun)
+        if (autoRun)
         {
             rb2d.velocity = new Vector2(runSpeed, rb2d.velocity.y);
-            if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
-                    animator.Play("Player_run");
+            //if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
+                    //animator.Play("Player_run");
         }
         else
         {
-            if(Input.GetKey("d") || Input.GetKey("right"))
+            if (Input.GetKey("d") || Input.GetKey("right"))
             {
                 rb2d.velocity = new Vector2(runSpeed, rb2d.velocity.y);
-                if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
-                    animator.Play("Player_run");
+                //if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
+                    //animator.Play("Player_run");
                 spriteRenderer.flipX = false;
             }
-            else if(Input.GetKey("a") || Input.GetKey("left"))
+            else if (Input.GetKey("a") || Input.GetKey("left"))
             {
                 rb2d.velocity = new Vector2(-runSpeed, rb2d.velocity.y);
-                if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
-                    animator.Play("Player_run");
+                //if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
+                    //animator.Play("Player_run");
                 spriteRenderer.flipX = true;
             }
-            else{
-                if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
-                    animator.Play("Player_idle");
+            else
+            {
+                //if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
+                    //animator.Play("Player_idle");
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
         }
-        if(Input.GetKey("space") && isGrounded && !(Input.GetKey("s") || Input.GetKey("down")) && rb2d.velocity.y <= vvErr)
+        if (Input.GetKey("space") && isGrounded && !(Input.GetKey("s") || Input.GetKey("down")) && rb2d.velocity.y <= vvErr)
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x, jumpHeight);
             //animator.Play("Player_jump");
         }
 
-        if((Input.GetKey("s") || Input.GetKey("down")) && Input.GetKey("space") && isGrounded)
+        if ((Input.GetKey("s") || Input.GetKey("down")) && Input.GetKey("space") && isGrounded)
         {
             StartCoroutine(getDropInput());
         }
@@ -112,7 +113,7 @@ public class PlayerController2D : MonoBehaviour
     IEnumerator getDropInput()
     {
         Physics2D.IgnoreLayerCollision(9, 10, true);
-        animator.Play("Player_jump");
+        //animator.Play("Player_jump");
         yield return new WaitForSeconds(0.4f);
         Physics2D.IgnoreLayerCollision(9, 10, false);
     }

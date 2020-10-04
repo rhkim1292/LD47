@@ -13,6 +13,9 @@ public class PlayerController2D : MonoBehaviour
     bool isGrounded;
 
     [SerializeField]
+    float vvErr = 0.5f;
+
+    [SerializeField]
     Transform groundCheck;
 
     [SerializeField]
@@ -69,7 +72,7 @@ public class PlayerController2D : MonoBehaviour
         if(autoRun)
         {
             rb2d.velocity = new Vector2(runSpeed, rb2d.velocity.y);
-            if(isGrounded && rb2d.velocity.y == 0)
+            if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
                     animator.Play("Player_run");
         }
         else
@@ -77,24 +80,24 @@ public class PlayerController2D : MonoBehaviour
             if(Input.GetKey("d") || Input.GetKey("right"))
             {
                 rb2d.velocity = new Vector2(runSpeed, rb2d.velocity.y);
-                if(isGrounded && rb2d.velocity.y == 0)
+                if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
                     animator.Play("Player_run");
                 spriteRenderer.flipX = false;
             }
             else if(Input.GetKey("a") || Input.GetKey("left"))
             {
                 rb2d.velocity = new Vector2(-runSpeed, rb2d.velocity.y);
-                if(isGrounded && rb2d.velocity.y == 0)
+                if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
                     animator.Play("Player_run");
                 spriteRenderer.flipX = true;
             }
             else{
-                if(isGrounded && rb2d.velocity.y == 0)
+                if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
                     animator.Play("Player_idle");
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
         }
-        if(Input.GetKey("space") && isGrounded && !(Input.GetKey("s") || Input.GetKey("down")))
+        if(Input.GetKey("space") && isGrounded && !(Input.GetKey("s") || Input.GetKey("down")) && rb2d.velocity.y >= -vvErr)
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x, jumpHeight);
             //animator.Play("Player_jump");
@@ -109,7 +112,8 @@ public class PlayerController2D : MonoBehaviour
     IEnumerator getDropInput()
     {
         Physics2D.IgnoreLayerCollision(9, 10, true);
-        yield return new WaitForSeconds(0.2f);
+        animator.Play("Player_jump");
+        yield return new WaitForSeconds(0.4f);
         Physics2D.IgnoreLayerCollision(9, 10, false);
         //rb2d.AddForce(new Vector2(0.0f, -20.0f));
     }

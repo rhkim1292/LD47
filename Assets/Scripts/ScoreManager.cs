@@ -8,8 +8,12 @@ public class ScoreManager : MonoBehaviour
     float initialPos;
     public Transform player;
     public Text ScoreText;
-    public int Score;
+    private int totalScore;
+    private int currScore;
     private bool restarted;
+
+    [SerializeField]
+    private int penalty;
 
     void Start()
     {
@@ -20,8 +24,23 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Score = (int)Vector2.Distance(new Vector2(player.position.x, 0), new Vector2(initialPos, 0));
-        ScoreText.text = Score.ToString();
+        if (restarted)
+        {
+            if (totalScore + currScore - penalty < 0)
+            {
+                totalScore = 0;
+            }
+            else
+            {
+                totalScore = totalScore + currScore - penalty;
+            }
+        }
+        else
+        {
+            currScore = (int)Vector2.Distance(new Vector2(player.position.x, 0), new Vector2(initialPos, 0));
+            ScoreText.text = (totalScore+currScore).ToString();
+        }
+        restarted = false;
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -32,9 +51,4 @@ public class ScoreManager : MonoBehaviour
             restarted = true;
         }
     }
-    /*void AddScore()
-    {
-        Score = Vector2.Distance(player.position, transform.position);
-        ScoreText.text = Score.ToString("0");
-    }*/
 }

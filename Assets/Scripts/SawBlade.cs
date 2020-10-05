@@ -12,6 +12,8 @@ public class SawBlade : MonoBehaviour
 
     [SerializeField] Transform RespawnLocation;
     [SerializeField] string PlayerLayerString = "Player";
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip respawnSound;
 
     private bool reverseMovement = false;
     private Camera cam;
@@ -86,6 +88,7 @@ public class SawBlade : MonoBehaviour
         {
             col.transform.position = RespawnLocation.position;
             cam.transform.position = RespawnLocation.position;
+            audioSource.PlayOneShot(respawnSound);
         }
     }
 }

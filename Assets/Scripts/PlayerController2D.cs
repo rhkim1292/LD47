@@ -62,6 +62,20 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField]
     int airjumpCount = 1;
 
+    [SerializeField] AudioSource audioSource;
+
+    [SerializeField]
+    AudioClip boostSound;
+
+    [SerializeField]
+    AudioClip jumpSound0;
+
+    [SerializeField]
+    AudioClip jumpSound1;
+
+    [SerializeField]
+    AudioClip powerupSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -141,6 +155,7 @@ public class PlayerController2D : MonoBehaviour
                     Speed_Burst_Cast_Effect.Play();
                     currBoost = currBoost + addBoostMount;
                     boosted = false;
+                    audioSource.PlayOneShot(boostSound);
                 }
                 rb2d.velocity = new Vector2(runSpeed + currBoost, rb2d.velocity.y);
                 //if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
@@ -185,6 +200,7 @@ public class PlayerController2D : MonoBehaviour
                 {
                     jumped = false;
                     rb2d.velocity = new Vector2(rb2d.velocity.x, jumpHeight);
+                    audioSource.PlayOneShot(jumpSound0);
                     //animator.Play("Player_jump");
                 }
             }
@@ -195,6 +211,7 @@ public class PlayerController2D : MonoBehaviour
                     rb2d.velocity = new Vector2(rb2d.velocity.x, jumpHeight);
                     //animator.Play("Player_jump");
                     airJumpsLeft--;
+                    audioSource.PlayOneShot(jumpSound1);
                 }
                     
             }
@@ -205,6 +222,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 jumped = false;
                 rb2d.velocity = new Vector2(rb2d.velocity.x, jumpHeight);
+                audioSource.PlayOneShot(jumpSound0);
                 //animator.Play("Player_jump");
             }
         }
@@ -230,17 +248,20 @@ public class PlayerController2D : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Boost"))
         {
             currBoost = addBoostMount;
+            audioSource.PlayOneShot(boostSound);
         }
         if (collision.gameObject.name == "Double_Jump")
         {
             Destroy(collision.gameObject);
             dblJumpEnabled = true;
+            audioSource.PlayOneShot(powerupSound);
         }
         if (collision.gameObject.name == "Speed_Burst")
         {
             Speed_Burst_Ready_Effect.Play();
             Destroy(collision.gameObject);
             spdBrstEnabled = true;
+            audioSource.PlayOneShot(powerupSound);
         }
     }
 

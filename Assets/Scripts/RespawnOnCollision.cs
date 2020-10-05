@@ -6,7 +6,9 @@ public class RespawnOnCollision : MonoBehaviour
 {
     [SerializeField] Transform RespawnLocation;
     [SerializeField] Camera cam;
-    [SerializeField] string PlayerLayerString = "Player"; 
+    [SerializeField] string PlayerLayerString = "Player";
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip respawnSound;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,7 @@ public class RespawnOnCollision : MonoBehaviour
         {
             col.transform.position = RespawnLocation.position;
             cam.transform.position = RespawnLocation.position;
+            audioSource.PlayOneShot(respawnSound);
         }
     }
 }

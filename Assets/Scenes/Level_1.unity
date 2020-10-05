@@ -5309,7 +5309,7 @@ MonoBehaviour:
   RespawnLocation: {fileID: 1308567218}
   PlayerLayerString: Player
   audioSource: {fileID: 1845702124}
-  respawnSound: {fileID: 8300000, guid: 136938c3c57957547a91c0ec6ecadcdf, type: 3}
+  respawnSound: {fileID: 8300000, guid: 31b2aae0cc77c1248b1ae6128c214341, type: 3}
 --- !u!58 &698023944
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5429,7 +5429,7 @@ MonoBehaviour:
   RespawnLocation: {fileID: 1308567218}
   PlayerLayerString: Player
   audioSource: {fileID: 1845702124}
-  respawnSound: {fileID: 8300000, guid: 136938c3c57957547a91c0ec6ecadcdf, type: 3}
+  respawnSound: {fileID: 8300000, guid: 31b2aae0cc77c1248b1ae6128c214341, type: 3}
 --- !u!58 &746864824
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5627,7 +5627,7 @@ MonoBehaviour:
   RespawnLocation: {fileID: 1308567218}
   PlayerLayerString: Player
   audioSource: {fileID: 1845702124}
-  respawnSound: {fileID: 8300000, guid: 136938c3c57957547a91c0ec6ecadcdf, type: 3}
+  respawnSound: {fileID: 8300000, guid: 31b2aae0cc77c1248b1ae6128c214341, type: 3}
 --- !u!58 &1113787159
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5931,7 +5931,7 @@ MonoBehaviour:
   RespawnLocation: {fileID: 1308567218}
   PlayerLayerString: Player
   audioSource: {fileID: 1845702124}
-  respawnSound: {fileID: 8300000, guid: 136938c3c57957547a91c0ec6ecadcdf, type: 3}
+  respawnSound: {fileID: 8300000, guid: 31b2aae0cc77c1248b1ae6128c214341, type: 3}
 --- !u!58 &1298723101
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15287,7 +15287,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f792783acd27da04c96658064f98d197, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5b21e2a915d838e438ef338a1bea00c3, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -15440,7 +15440,7 @@ MonoBehaviour:
   RespawnLocation: {fileID: 1308567218}
   PlayerLayerString: Player
   audioSource: {fileID: 1845702124}
-  respawnSound: {fileID: 8300000, guid: 136938c3c57957547a91c0ec6ecadcdf, type: 3}
+  respawnSound: {fileID: 8300000, guid: 31b2aae0cc77c1248b1ae6128c214341, type: 3}
 --- !u!58 &1860704491
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15558,10 +15558,10 @@ MonoBehaviour:
   spdBrstEnabled: 0
   airjumpCount: 1
   audioSource: {fileID: 1845702124}
-  boostSound: {fileID: 8300000, guid: d2a5ac18e94d0bc4783054b14fb17a2d, type: 3}
-  jumpSound0: {fileID: 8300000, guid: 5bb67039fdb4a4643924a5d99544f78c, type: 3}
-  jumpSound1: {fileID: 8300000, guid: da6716c22eb8caa4eadc571ccbd2b4ee, type: 3}
-  powerupSound: {fileID: 8300000, guid: 2aa3e08f1404449499b23afa6e1646c2, type: 3}
+  boostSound: {fileID: 8300000, guid: 5c61ada3f27ad614c80d92d8d4b273a0, type: 3}
+  jumpSound0: {fileID: 8300000, guid: ec23df86940c5b947bed0b3df2c6310f, type: 3}
+  jumpSound1: {fileID: 8300000, guid: 0e296d82f878a1248a545756f0c9429b, type: 3}
+  powerupSound: {fileID: 8300000, guid: 80f0cb1b8ed0bbb408ff6d075b84a475, type: 3}
 --- !u!50 &1943489106
 Rigidbody2D:
   serializedVersion: 4
@@ -21857,7 +21857,7 @@ MonoBehaviour:
   cam: {fileID: 427004445}
   PlayerLayerString: Player
   audioSource: {fileID: 1845702124}
-  respawnSound: {fileID: 8300000, guid: 136938c3c57957547a91c0ec6ecadcdf, type: 3}
+  respawnSound: {fileID: 8300000, guid: 31b2aae0cc77c1248b1ae6128c214341, type: 3}
 --- !u!1 &2139093717
 GameObject:
   m_ObjectHideFlags: 0
@@ -21911,7 +21911,7 @@ MonoBehaviour:
   RespawnLocation: {fileID: 1308567218}
   PlayerLayerString: Player
   audioSource: {fileID: 1845702124}
-  respawnSound: {fileID: 8300000, guid: 136938c3c57957547a91c0ec6ecadcdf, type: 3}
+  respawnSound: {fileID: 8300000, guid: 31b2aae0cc77c1248b1ae6128c214341, type: 3}
 --- !u!58 &2139093720
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -250,6 +250,10 @@ public class PlayerController2D : MonoBehaviour
             currBoost = addBoostMount;
             audioSource.PlayOneShot(boostSound);
         }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("DoubleJump"))
+        {
+            dblJumpEnabled = true;
+        }
         if (collision.gameObject.name == "Double_Jump")
         {
             Destroy(collision.gameObject);
@@ -265,6 +269,13 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("DoubleJump"))
+        {
+            dblJumpEnabled = false;
+        }
+    }
     IEnumerator getDropInput()
     {
         Physics2D.IgnoreLayerCollision(9, 10, true);

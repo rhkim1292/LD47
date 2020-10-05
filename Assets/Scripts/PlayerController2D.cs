@@ -11,8 +11,14 @@ public class PlayerController2D : MonoBehaviour
     Collider2D platformCollider;
 
     private float currBoost = 0.0f;
-
     bool isGrounded;
+    private int airJumpsLeft;
+    bool jumped;
+    bool dropped;
+    bool boosted;
+
+    [SerializeField]
+    private bool jumpKeyReset = false;
 
     [SerializeField]
     float vvErr = 0.5f;
@@ -44,6 +50,15 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField]
     bool autoRun = false;
 
+    [SerializeField]
+    bool dblJumpEnabled;
+
+    [SerializeField]
+    bool spdBrstEnabled;
+
+    [SerializeField]
+    int airjumpCount = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,11 +71,43 @@ public class PlayerController2D : MonoBehaviour
 
         //Disable PlatformEffector2D
         platformEffector.useColliderMask = false;
+        dblJumpEnabled = false;
+        spdBrstEnabled = false;
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown("space") && !(Input.GetKey("s") || Input.GetKey("down")))
+        {
+            jumped = true;
+        }
+        if (Input.GetKeyUp("space"))
+        {
+            jumped = false;
+        }
+        if ((Input.GetKey("s") || Input.GetKey("down")) && Input.GetKey("space"))
+        {
+            dropped = true;
+        }
+        if ((Input.GetKeyUp("s") || Input.GetKeyUp("down")) || Input.GetKeyUp("space"))
+        {
+            dropped = false;
+        }
+        if (Input.GetKeyDown("left shift"))
+        {
+            boosted = true;
+        }
+        if (Input.GetKeyUp("left shift"))
+        {
+            boosted = false;
+        }
+    }
     private void FixedUpdate()
     {
-        //Debug.Log("Grounded: " + isGrounded);
+        if (rb2d.velocity.x > runSpeed)
+        {
+            boosted = false;
+        }
 
         if ((Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"))) ||
            (Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Ground"))) ||
@@ -70,6 +117,7 @@ public class PlayerController2D : MonoBehaviour
            (Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Platform"))))
         {
             isGrounded = true;
+            airJumpsLeft = airjumpCount;
         }
         else
         {
@@ -79,9 +127,23 @@ public class PlayerController2D : MonoBehaviour
 
         if (autoRun)
         {
-            rb2d.velocity = new Vector2(runSpeed + currBoost, rb2d.velocity.y);
-            //if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
+            if (spdBrstEnabled)
+            {
+                if (boosted)
+                {
+                    currBoost = currBoost + addBoostMount;
+                    boosted = false;
+                }
+                rb2d.velocity = new Vector2(runSpeed + currBoost, rb2d.velocity.y);
+                //if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
                     //animator.Play("Player_run");
+            }
+            else
+            {
+                rb2d.velocity = new Vector2(runSpeed + currBoost, rb2d.velocity.y);
+                //if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
+                    //animator.Play("Player_run");
+            }
         }
         else
         {
@@ -106,13 +168,40 @@ public class PlayerController2D : MonoBehaviour
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
         }
-        if (Input.GetKey("space") && isGrounded && !(Input.GetKey("s") || Input.GetKey("down")) && rb2d.velocity.y <= vvErr)
+
+        if (dblJumpEnabled)
         {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, jumpHeight);
-            //animator.Play("Player_jump");
+            if (isGrounded)
+            {
+                if (jumped && rb2d.velocity.y <= vvErr)
+                {
+                    jumped = false;
+                    rb2d.velocity = new Vector2(rb2d.velocity.x, jumpHeight);
+                    //animator.Play("Player_jump");
+                }
+            }
+            else
+            {
+                if (jumped && airJumpsLeft > 0)
+                {
+                    rb2d.velocity = new Vector2(rb2d.velocity.x, jumpHeight);
+                    //animator.Play("Player_jump");
+                    airJumpsLeft--;
+                }
+                    
+            }
+        }
+        else
+        {
+            if (jumped && isGrounded && rb2d.velocity.y <= vvErr)
+            {
+                jumped = false;
+                rb2d.velocity = new Vector2(rb2d.velocity.x, jumpHeight);
+                //animator.Play("Player_jump");
+            }
         }
 
-        if ((Input.GetKey("s") || Input.GetKey("down")) && Input.GetKey("space") && isGrounded)
+        if (dropped && isGrounded)
         {
             StartCoroutine(getDropInput());
         }
@@ -133,6 +222,16 @@ public class PlayerController2D : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Boost"))
         {
             currBoost = addBoostMount;
+        }
+        if (collision.gameObject.name == "Double_Jump")
+        {
+            Destroy(collision.gameObject);
+            dblJumpEnabled = true;
+        }
+        if (collision.gameObject.name == "Speed_Burst")
+        {
+            Destroy(collision.gameObject);
+            spdBrstEnabled = true;
         }
     }
 

@@ -204,7 +204,6 @@ MonoBehaviour:
   MaxMoveUnits: 1
   MovementPerSecond: 1
   RespawnLocation: {fileID: 1308567218}
-  cam: {fileID: 427004445}
   PlayerLayerString: Player
 --- !u!212 &264351490
 SpriteRenderer:
@@ -2476,6 +2475,8 @@ MonoBehaviour:
   platforms: {fileID: 1536268663}
   runSpeed: 25.01
   jumpHeight: 30
+  addBoostMount: 25
+  boostDecayPerSecond: 5
   autoRun: 1
 --- !u!50 &1943489106
 Rigidbody2D:
@@ -2624,7 +2625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1943489109}
   ScoreText: {fileID: 374248016}
-  Score: 0
+  penalty: 100
 --- !u!1 &2136933088
 GameObject:
   m_ObjectHideFlags: 0

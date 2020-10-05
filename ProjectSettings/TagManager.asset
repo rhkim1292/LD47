@@ -18,7 +18,7 @@ TagManager:
   - Platform
   - Restart
   - Boost
-  - 
+  - PowerUp
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: Restart
     uniqueID: 1016205455
+    locked: 0
+  - name: PowerUp
+    uniqueID: 2878078271
     locked: 0

@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class SawBlade : MonoBehaviour
 {
-    [SerializeField] float AnglePerSecond = 180.0f;     // Rotations per second
+    [SerializeField] float AnglePerSecond = 400.0f;     // Rotations per second
     [SerializeField] bool Movement = false;             // Enabled positional movement
     [SerializeField] bool VerticalMovement = false;     // False = Horizontal Movement | True = Verical Movement
-    [SerializeField] float MaxMoveUnits = 0.0f;         // 1 unit
+    [SerializeField] float MaxMoveUnits = 0.0f;
     [SerializeField] float MovementPerSecond = 0.1f;
 
     [SerializeField] Transform RespawnLocation;
-    [SerializeField] Camera cam;
     [SerializeField] string PlayerLayerString = "Player";
 
     private bool reverseMovement = false;
+    private Camera cam;
     private Vector3 originalPos;
     private float elapsedMovement = 0.0f;
 
@@ -22,6 +22,7 @@ public class SawBlade : MonoBehaviour
     void Start()
     {
         originalPos = this.transform.position;
+        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
     // Update is called once per frame

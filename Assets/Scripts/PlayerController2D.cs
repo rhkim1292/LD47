@@ -10,6 +10,8 @@ public class PlayerController2D : MonoBehaviour
     Collider2D playerCollider;
     Collider2D platformCollider;
 
+    private float currBoost = 0.0f;
+
     bool isGrounded;
 
     [SerializeField]
@@ -28,10 +30,16 @@ public class PlayerController2D : MonoBehaviour
     GameObject platforms;
 
     [SerializeField]
-    private float runSpeed = 1;
+    private float runSpeed = 25;
 
     [SerializeField]
-    private float jumpHeight = 1;
+    private float jumpHeight = 30;
+
+    [SerializeField]
+    private float addBoostMount = 25;
+
+    [SerializeField]
+    private float boostDecayPerSecond = 5.0f;
 
     [SerializeField]
     bool autoRun = false;
@@ -71,7 +79,7 @@ public class PlayerController2D : MonoBehaviour
 
         if (autoRun)
         {
-            rb2d.velocity = new Vector2(runSpeed, rb2d.velocity.y);
+            rb2d.velocity = new Vector2(runSpeed + currBoost, rb2d.velocity.y);
             //if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
                     //animator.Play("Player_run");
         }
@@ -79,14 +87,14 @@ public class PlayerController2D : MonoBehaviour
         {
             if (Input.GetKey("d") || Input.GetKey("right"))
             {
-                rb2d.velocity = new Vector2(runSpeed, rb2d.velocity.y);
+                rb2d.velocity = new Vector2(runSpeed + currBoost, rb2d.velocity.y);
                 //if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
                     //animator.Play("Player_run");
                 spriteRenderer.flipX = false;
             }
             else if (Input.GetKey("a") || Input.GetKey("left"))
             {
-                rb2d.velocity = new Vector2(-runSpeed, rb2d.velocity.y);
+                rb2d.velocity = new Vector2(-runSpeed - currBoost, rb2d.velocity.y);
                 //if(isGrounded && rb2d.velocity.y >= -vvErr && rb2d.velocity.y < vvErr)
                     //animator.Play("Player_run");
                 spriteRenderer.flipX = true;
@@ -107,6 +115,24 @@ public class PlayerController2D : MonoBehaviour
         if ((Input.GetKey("s") || Input.GetKey("down")) && Input.GetKey("space") && isGrounded)
         {
             StartCoroutine(getDropInput());
+        }
+
+        manageBoost();
+    }
+
+    private void manageBoost()
+    {
+        if (currBoost > 0)
+            currBoost -= boostDecayPerSecond*Time.deltaTime;
+        else
+            currBoost = 0.0f;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Boost"))
+        {
+            currBoost = addBoostMount;
         }
     }
 

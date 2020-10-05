@@ -269,7 +269,7 @@ public class PlayerController2D : MonoBehaviour
     {
         Physics2D.IgnoreLayerCollision(9, 10, true);
         //animator.Play("Player_jump");
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.2f);
         Physics2D.IgnoreLayerCollision(9, 10, false);
     }
 }

@@ -17,6 +17,9 @@ public class PlayerController2D : MonoBehaviour
     bool dropped;
     bool boosted;
 
+    public ParticleSystem Speed_Burst_Ready_Effect;
+    public ParticleSystem Speed_Burst_Cast_Effect;
+
     [SerializeField]
     private bool jumpKeyReset = false;
 
@@ -104,11 +107,6 @@ public class PlayerController2D : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (rb2d.velocity.x > runSpeed)
-        {
-            boosted = false;
-        }
-
         if ((Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"))) ||
            (Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Ground"))) ||
            (Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Ground"))) ||
@@ -129,8 +127,18 @@ public class PlayerController2D : MonoBehaviour
         {
             if (spdBrstEnabled)
             {
+                if (rb2d.velocity.x > runSpeed)
+                {
+                    Speed_Burst_Ready_Effect.Stop();
+                    boosted = false;
+                }
+                else
+                {
+                    Speed_Burst_Ready_Effect.Play();
+                }
                 if (boosted)
                 {
+                    Speed_Burst_Cast_Effect.Play();
                     currBoost = currBoost + addBoostMount;
                     boosted = false;
                 }
@@ -230,6 +238,7 @@ public class PlayerController2D : MonoBehaviour
         }
         if (collision.gameObject.name == "Speed_Burst")
         {
+            Speed_Burst_Ready_Effect.Play();
             Destroy(collision.gameObject);
             spdBrstEnabled = true;
         }

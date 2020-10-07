@@ -45,7 +45,6 @@ public class ScoreManager : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log(col.gameObject.layer);
         if (col.gameObject.layer == 11)
         {
             restarted = true;

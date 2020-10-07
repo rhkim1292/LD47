@@ -102,11 +102,11 @@ public class PlayerController2D : MonoBehaviour
         {
             jumped = false;
         }
-        if ((Input.GetKey("s") || Input.GetKey("down")) && Input.GetKey("space"))
+        if ((Input.GetKey("s") || Input.GetKey("down")))
         {
             dropped = true;
         }
-        if ((Input.GetKeyUp("s") || Input.GetKeyUp("down")) || Input.GetKeyUp("space"))
+        if ((Input.GetKeyUp("s") || Input.GetKeyUp("down")))
         {
             dropped = false;
         }

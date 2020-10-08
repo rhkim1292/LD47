@@ -21,9 +21,6 @@ public class PlayerController2D : MonoBehaviour
     public ParticleSystem Speed_Burst_Cast_Effect;
 
     [SerializeField]
-    private bool jumpKeyReset = false;
-
-    [SerializeField]
     float vvErr = 0.5f;
 
     [SerializeField]
@@ -37,6 +34,9 @@ public class PlayerController2D : MonoBehaviour
 
     [SerializeField]
     GameObject platforms;
+
+    [SerializeField]
+    GameObject dblJumpTiles;
 
     [SerializeField]
     private float runSpeed = 25;
@@ -243,29 +243,32 @@ public class PlayerController2D : MonoBehaviour
             currBoost = 0.0f;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Boost"))
+        if (col.gameObject.layer == LayerMask.NameToLayer("Boost"))
         {
             currBoost = addBoostMount;
             audioSource.PlayOneShot(boostSound);
         }
-        if (collision.gameObject.layer == LayerMask.NameToLayer("DoubleJump"))
+        if (col.gameObject.layer == LayerMask.NameToLayer("DoubleJump"))
         {
             dblJumpEnabled = true;
         }
-        if (collision.gameObject.name == "Double_Jump")
+        powerCheck(ref dblJumpEnabled, col, "Double_Jump");
+        powerCheck(ref spdBrstEnabled, col, "Speed_Burst");
+    }
+
+    private void powerCheck(ref bool powerToggle, Collider2D col, string powerName)
+    {
+        if (col.gameObject.name == powerName)
         {
-            Destroy(collision.gameObject);
-            dblJumpEnabled = true;
+            Destroy(col.gameObject);
+            powerToggle = true;
             audioSource.PlayOneShot(powerupSound);
-        }
-        if (collision.gameObject.name == "Speed_Burst")
-        {
-            Speed_Burst_Ready_Effect.Play();
-            Destroy(collision.gameObject);
-            spdBrstEnabled = true;
-            audioSource.PlayOneShot(powerupSound);
+            if (powerName == "Double_Jump")
+            {
+                dblJumpTiles.GetComponent<Collider2D>().enabled = false;
+            }
         }
     }
 

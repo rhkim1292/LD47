@@ -25550,12 +25550,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed_Burst_Ready_Effect: {fileID: 76536848}
   Speed_Burst_Cast_Effect: {fileID: 1416873556}
-  jumpKeyReset: 0
   vvErr: 0.25
   groundCheck: {fileID: 842005408}
   groundCheckL: {fileID: 240473664}
   groundCheckR: {fileID: 1177908286}
   platforms: {fileID: 1536268663}
+  dblJumpTiles: {fileID: 1496679524}
   runSpeed: 25.01
   jumpHeight: 30
   addBoostMount: 25
